@@ -6,7 +6,7 @@ import { HiOutlineUserCircle } from 'react-icons/hi'
 const ContactCard = ({contact}) => {
   return (
     <div key={contact.id} className="bg-yellow flex
-          justify-around items-center p-2 rounded-lg ">
+          justify-between items-center p-2 rounded-lg ">
            <div className="flex gap-1">
            <HiOutlineUserCircle className="text-4xl text-orange"/>
             <div className="">

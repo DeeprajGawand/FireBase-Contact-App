@@ -4,14 +4,23 @@ import {AiFillPlusCircle} from "react-icons/ai"
 import { useEffect, useState } from "react";
 import { collection, getDocs } from "firebase/firestore";
 import {db} from "./config/firebase"
-import {HiOutlineUserCircle } from "react-icons/hi";
 
-import {IoMdTrash} from "react-icons/io";
-import {RiEditCircleLine} from "react-icons/ri"
 import ContactCard from "./components/ContactCard";
+import Modal from "./components/Modal";
 
  
 const App = () => {
+ 
+  const [isOpen, setOpen] = useState(false);
+
+  const onOpen = () => {
+    setOpen(true);
+  };
+
+  const onClose = ()=>{
+    setOpen(false);
+  };
+
 
   const[contacts, setContacts] = useState([]);
 
@@ -37,6 +46,7 @@ const App = () => {
   },[])
 
   return (
+    <>
    <div className="mx-auto max-w-[370px] px-4">
     <Navbar/>
     <div className="flex gap-2">
@@ -48,15 +58,23 @@ const App = () => {
       placeholder="Search Contact"
       />
     </div>
-      <AiFillPlusCircle className="text-5xl cursor-pointer text-white" />
+      <AiFillPlusCircle
+      onClick={onOpen}
+      className="text-5xl cursor-pointer text-white" />
     </div>
-    <div className="mt-4">
+    <div className="mt-4 flex flex-col gap-3">
       {contacts.map((contact) => (
           <ContactCard key={contact.id} contact={contact}/>
       ))}
     </div>
    </div>
-  )
-}
+   <div>
+    <Modal isOpen={isOpen} onClose={onClose}>
+      Hi
+    </Modal>
+   </div>
+   </>
+  );
+};
 
 export default App
