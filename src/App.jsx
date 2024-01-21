@@ -70,7 +70,7 @@ const App = () => {
    </div>
    <div>
     <Modal isOpen={isOpen} onClose={onClose}>
-      Hi
+      Hi Everyone
     </Modal>
    </div>
    </>
