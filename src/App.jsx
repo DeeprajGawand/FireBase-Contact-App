@@ -2,25 +2,17 @@ import Navbar from "./components/Navbar"
 import {FiSearch} from "react-icons/fi";
 import {AiFillPlusCircle} from "react-icons/ai"
 import { useEffect, useState } from "react";
-import { collection, getDocs } from "firebase/firestore";
+import { collection, getDocs, onSnapshot } from "firebase/firestore";
 import {db} from "./config/firebase"
 
 import ContactCard from "./components/ContactCard";
 import Modal from "./components/Modal";
 import AddAndUpdateContact from "./components/AddAndUpdateContact";
-
+import useDisclouse from "./hooks/useDisclouse";
  
 const App = () => {
  
-  const [isOpen, setOpen] = useState(false);
-
-  const onOpen = () => {
-    setOpen(true);
-  };
-
-  const onClose = ()=>{
-    setOpen(false);
-  };
+  const {isOpen, onClose, onOpen} = useDisclouse();
 
 
   const[contacts, setContacts] = useState([]);
@@ -31,6 +23,8 @@ const App = () => {
       try {
         const contactsRef= collection(db,"contacts");
         const contactsSnapshot = await getDocs(contactsRef);
+
+        
         const contactLists = contactsSnapshot.docs.map((doc) => {
           return{
             id: doc.id,
