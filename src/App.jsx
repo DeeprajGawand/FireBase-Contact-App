@@ -24,14 +24,17 @@ const App = () => {
         const contactsRef= collection(db,"contacts");
         const contactsSnapshot = await getDocs(contactsRef);
 
+        onSnapshot(contactsRef, (snapshot) =>{
+          const contactLists = snapshot.docs.map((doc) => {
+            return{
+              id: doc.id,
+              ...doc.data(),
+            };
+          });
+          setContacts(contactLists);
+          return contactLists;
+        })
         
-        const contactLists = contactsSnapshot.docs.map((doc) => {
-          return{
-            id: doc.id,
-            ...doc.data(),
-          };
-        });
-        setContacts(contactLists);
       } catch (error) {
         console.log(error);
       }
