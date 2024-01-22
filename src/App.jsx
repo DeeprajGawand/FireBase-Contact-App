@@ -4,7 +4,8 @@ import {AiFillPlusCircle} from "react-icons/ai"
 import { useEffect, useState } from "react";
 import { collection, getDocs, onSnapshot } from "firebase/firestore";
 import {db} from "./config/firebase"
-
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import ContactCard from "./components/ContactCard";
 import Modal from "./components/Modal";
 import AddAndUpdateContact from "./components/AddAndUpdateContact";
@@ -67,8 +68,8 @@ const App = () => {
     </div>
    </div>
    <AddAndUpdateContact
-   onClose={onClose} isOpen={isOpen}
-   />
+   onClose={onClose} isOpen={isOpen} />
+   <ToastContainer/>
    </>
   );
 };

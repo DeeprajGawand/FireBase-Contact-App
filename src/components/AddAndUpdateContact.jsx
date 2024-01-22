@@ -2,6 +2,8 @@ import {Field, Form, Formik} from "formik";
 import Modal from './Modal';
 import { addDoc, collection, doc, updateDoc } from "firebase/firestore";
 import { db } from "../config/firebase";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const AddAndUpdateContact = ({onClose, isOpen, isUpdate, contact}) => {
   const addContact = async (contact) => {
@@ -9,6 +11,7 @@ const AddAndUpdateContact = ({onClose, isOpen, isUpdate, contact}) => {
         const contactRef = collection(db, "contacts");
         await addDoc(contactRef, contact)   
         onClose();
+        toast.success("contact Add Sucessfully")
     } catch (error) {
        console.log(error); 
     }
@@ -18,6 +21,7 @@ const AddAndUpdateContact = ({onClose, isOpen, isUpdate, contact}) => {
         const contactRef = doc(db, "contacts", id);
         await updateDoc(contactRef, contact)   
       onClose();
+      toast.success("contact Update Sucessfully")
     } catch (error) {
        console.log(error); 
     }
