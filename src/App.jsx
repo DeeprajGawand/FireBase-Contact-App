@@ -10,6 +10,7 @@ import ContactCard from "./components/ContactCard";
 import Modal from "./components/Modal";
 import AddAndUpdateContact from "./components/AddAndUpdateContact";
 import useDisclouse from "./hooks/useDisclouse";
+import NotFoundContact from "./components/NotFoundContact";
  
 const App = () => {
  
@@ -86,9 +87,12 @@ const App = () => {
       className="text-5xl cursor-pointer text-white" />
     </div>
     <div className="mt-4 flex flex-col gap-3">
-      {contacts.map((contact) => (
+      {contacts.length <= 0 ? (
+        <NotFoundContact/>
+      ): (contacts.map((contact) => (
           <ContactCard key={contact.id} contact={contact}/>
-      ))}
+      ))
+      )}
     </div>
    </div>
    <AddAndUpdateContact
